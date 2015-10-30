@@ -1,12 +1,12 @@
 import { Component, PropTypes } from 'react';
 
-export default class TodoApp extends Component {
+export default class App extends Component {
   static propTypes = {
     children: PropTypes.any.isRequired
   }
 
   componentWillMount() {
-    require('./css/TodoApp.import.css');
+    require('./css/App.import.css');
   }
 
   render() {

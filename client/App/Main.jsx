@@ -6,29 +6,29 @@ import ReactMeteorData from 'react-meteor-data';
 import TodoHeader from './components/TodoHeader';
 import TodoList from './components/TodoList';
 
-import Tasks from '../../collections/Tasks';
+import Entries from '../../collections/Entries';
 
 @ReactMixin.decorate(ReactMeteorData)
-export default class TodoMain extends Component {
+export default class Main extends Component {
 
   state = {
     hideCompleted: false
   }
 
   getMeteorData() {
-    Meteor.subscribe('tasks');
+    Meteor.subscribe('entries');
 
-    let taskFilter = {};
+    let entryFilter = {};
 
     if (this.state.hideCompleted) {
-      taskFilter.checked = {$ne: true};
+      entryFilter.checked = {$ne: true};
     }
 
-    const tasks = Tasks.find(taskFilter, {sort: {createdAt: -1}}).fetch();
-    const incompleteCount = Tasks.find({checked: {$ne: true}}).count();
+    const entries = Entries.find(entryFilter, {sort: {createdAt: -1}}).fetch();
+    const incompleteCount = Entries.find({checked: {$ne: true}}).count();
 
     return {
-      tasks,
+      entries,
       incompleteCount,
       user: Meteor.user()
     };
@@ -39,7 +39,7 @@ export default class TodoMain extends Component {
   }
 
   render() {
-    if (!this.data.tasks) {
+    if (!this.data.entries) {
       // loading
       return null;
     }
@@ -52,7 +52,7 @@ export default class TodoMain extends Component {
               hideCompleted={this.state.hideCompleted}
               toggleHideCompleted={this.handleToggleHideCompleted}
           />
-          <TodoList tasks={this.data.tasks} />
+          <TodoList entries={this.data.entries} />
         </div>
     );
   }

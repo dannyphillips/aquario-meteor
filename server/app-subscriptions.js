@@ -1,8 +1,8 @@
-import Tasks from '../collections/Tasks';
+import Entries from '../collections/Entries';
 
 // This code only runs on the server
-Meteor.publish('tasks', function () {
-  return Tasks.find({
+Meteor.publish('entries', function () {
+  return Entries.find({
     $or: [
       { private: {$ne: true} },
       { owner: this.userId }

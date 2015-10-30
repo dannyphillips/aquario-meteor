@@ -3,13 +3,13 @@ import TodoItem from './TodoItem';
 
 export default class TodoList extends Component {
   static propTypes = {
-    tasks: PropTypes.array.isRequired
+    entries: PropTypes.array.isRequired
   }
 
   render() {
     return (
       <ul>
-        {this.props.tasks.map(task => <TodoItem key={task._id} task={task} />)}
+        {this.props.entries.map(entry => <TodoItem key={entry._id} entry={entry} />)}
       </ul>
     );
   }

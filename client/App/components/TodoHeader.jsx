@@ -17,8 +17,8 @@ export default class TodoHeader extends Component {
     // Get value from form element
     var text = event.target.text.value;
 
-    // Insert a task into the collection
-    Meteor.call('addTask', text);
+    // Insert a entry into the collection
+    Meteor.call('addEntry', text);
 
     // Clear form
     event.target.text.value = '';
@@ -29,8 +29,8 @@ export default class TodoHeader extends Component {
 
     if (Meteor.userId()) {
       form = (
-        <form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" name="text" placeholder="Type to add new tasks" />
+        <form className="new-entry" onSubmit={this.handleSubmit.bind(this)}>
+          <input type="text" name="text" placeholder="Type to add new entries" />
         </form>
       );
     }
@@ -44,7 +44,7 @@ export default class TodoHeader extends Component {
 
         <label className="hide-completed">
           <input type="checkbox" checked={this.props.hideCompleted} onChange={this.props.toggleHideCompleted} />
-          Hide Completed Tasks
+          Hide Completed Entries
         </label>
 
         <LoginButtons />

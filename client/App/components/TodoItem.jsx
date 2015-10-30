@@ -2,30 +2,30 @@ import { Component, PropTypes } from 'react';
 
 export default class TodoItem extends Component {
   static propTypes = {
-    task: PropTypes.object.isRequired
+    entry: PropTypes.object.isRequired
   }
 
   handleChecked(e) {
     // Set the checked property to the opposite of its current value
-    Meteor.call('setChecked', this.props.task._id, e.target.checked);
+    Meteor.call('setChecked', this.props.entry._id, e.target.checked);
   }
 
   handleDelete() {
-    Meteor.call('deleteTask', this.props.task._id);
+    Meteor.call('deleteEntry', this.props.entry._id);
   }
 
   handleSetPrivate() {
-    Meteor.call('setPrivate', this.props.task._id, !this.props.task.private);
+    Meteor.call('setPrivate', this.props.entry._id, !this.props.entry.private);
   }
 
   renderTogglePrivate() {
-    if (Meteor.userId() !== this.props.task.owner) {
+    if (Meteor.userId() !== this.props.entry.owner) {
       return null;
     }
 
     return (
       <button className="toggle-private" onClick={this.handleSetPrivate.bind(this)}>
-        {this.props.task.private ? 'Private' : 'Public'}
+        {this.props.entry.private ? 'Private' : 'Public'}
       </button>
     );
   }
@@ -33,20 +33,20 @@ export default class TodoItem extends Component {
   render() {
     let itemClass = '';
 
-    if (this.props.task.checked) {
+    if (this.props.entry.checked) {
       itemClass += 'checked';
     }
 
-    if (this.props.task.private) {
+    if (this.props.entry.private) {
       itemClass += ' private';
     }
 
     return (
       <li className={itemClass}>
         <button className="delete" onClick={this.handleDelete.bind(this)}>&times;</button>
-        <input type="checkbox" checked={this.props.task.checked} onChange={this.handleChecked.bind(this)} className="toggle-checked" />
+        <input type="checkbox" checked={this.props.entry.checked} onChange={this.handleChecked.bind(this)} className="toggle-checked" />
         {this.renderTogglePrivate()}
-        <span className="text"><strong>{this.props.task.username}</strong> - {this.props.task.text}</span>
+        <span className="text"><strong>{this.props.entry.username}</strong> - {this.props.entry.text}</span>
       </li>
     );
   }

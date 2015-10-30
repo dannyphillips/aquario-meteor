@@ -1,8 +1,8 @@
-import AdminApp from './AdminApp';
+import Admin from './Admin';
 import Dashboard from './Dashboard';
 
 export default {
-  component: AdminApp,
+  component: Admin,
   childRoutes: [
     { path: 'dashboard', component: Dashboard }
   ]

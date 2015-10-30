@@ -1,7 +1,7 @@
 import { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-export default class AdminApp extends Component {
+export default class Admin extends Component {
   static propTypes = {
     children: PropTypes.any.isRequired
   }
